@@ -63,11 +63,11 @@ namespace SportsORM.Controllers
             ViewBag.AlexAndWyatt= context.Players
                 .Where(p => p.FirstName == "Alexander" || p.FirstName == "Wyatt");            
             
-            foreach(var t in ViewBag.Joshua)
-            {   
-                System.Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-                System.Console.WriteLine(t.TeamId);
-            }
+            // foreach(var t in ViewBag.Joshua)
+            // {   
+            //     System.Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            //     System.Console.WriteLine(t.TeamId);
+            // }
             
             
             
@@ -77,7 +77,47 @@ namespace SportsORM.Controllers
 
         [HttpGet("level_2")]
         public IActionResult Level2()
-        {
+        {   
+            ViewBag.AtlanticSoccer = context.Teams
+                // .Include(t=> t.CurrLeague)
+                .Where(t => t.CurrLeague.Name == "Atlantic Soccer Conference")
+                .ToList();
+            ViewBag.BostonPenguinsPlayers = context.Players
+                .Where(p => p.CurrentTeam.TeamName == "Penguins")
+                .Where(p => p.CurrentTeam.Location == "Boston")
+                .ToList();
+            ViewBag.InterBase = context.Teams
+                .Where(t => t.CurrLeague.Name == "International Collegiate Baseball Conference")
+                .ToList();
+            ViewBag.AAFootball = context.Teams
+                .Where(t => t.CurrLeague.Name == "American Conference of Amateur Football")
+                .ToList();
+            ViewBag.FootballTeams= context.Teams
+                .Where(t=> t.CurrLeague.Sport == "Football")
+                .ToList();
+            ViewBag.SophiaCurrentTeams= context.Players
+                .Where(p => p.FirstName == "Sophia")
+                .Include(p => p.CurrentTeam)
+                .ToList();
+            ViewBag.FloresNoRaptors = context.Players
+                .Where(p => p.LastName == "Flores")
+                .Where(p => p.CurrentTeam.TeamName != "Raptors")
+                .Include(p => p.CurrentTeam)
+                .ToList();
+            ViewBag.PlayersInTigerCats = context.Players
+                .Where(p => p.CurrentTeam.TeamName == "Tiger-Cats")
+                .Where(p => p.CurrentTeam.Location == "Manitoba")
+                .ToList();
+            ViewBag.TigerCatsPlayers = context.Teams
+                .Where(t => t.Location =="Manitoba")
+                .Where(t => t.TeamName == "Tiger-Cats")
+                .Include (t => t.CurrentPlayers)
+                .ToList();
+
+            ViewBag.Teams12Players = context.Teams
+                .Include(t => t.AllPlayers)
+                .Where(t => t.AllPlayers.Count >= 12)
+                .ToList();
             return View();
         }
 
