@@ -13,3 +13,196 @@
         <li>...all players, sorted by the number of teams they've played for</li>
     </ol>
 </div>
+<div class="col">
+    <div class="col-sm- col-md-6 col-lg-4">
+        <h3>1.1) All teams, past and present, that Alexander Bailey has played with</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Teams Name</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in ViewBag.AlexanderBailey.AllTeams)
+                {
+                    <tr>
+                        <td>@t.TeamOfPlayer.TeamId</td>
+                        <td>@t.TeamOfPlayer.TeamName</td>
+                        <td>@t.TeamOfPlayer.Location</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm- col-md-6 col-lg-4">
+        <h3>1.2) All teams, past and present, that Alexander Bailey has played with</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Teams Name</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in ViewBag.AlexanderBailey2)
+                {
+                    foreach (var p in t.AllPlayers)
+                    {
+                        if (p.PlayerOnTeam.FirstName == "Alexander" && p.PlayerOnTeam.LastName == "Bailey")
+                        {
+                            <tr>
+                                <td>@t.TeamId</td>
+                                <td>@t.TeamName</td>
+                                <td>@t.Location</td>
+                            </tr>
+                        }
+                    } 
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm- col-md-6 col-lg-4">
+        <h3>2) All players, past and present, with the Manitoba Tiger-Cats</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Current Team</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in ViewBag.ManitobaTigerCats.AllPlayers)
+                {
+                    <tr>
+                        <td>@p.PlayerOnTeam.PlayerId</td>
+                        <td>@p.PlayerOnTeam.FirstName @p.PlayerOnTeam.LastName </td>
+                        <td>@p.PlayerOnTeam.CurrentTeam.TeamName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm- col-md-6 col-lg-4">
+        <h3>3) All players, who were formerly (but aren't currently) with the Wichita Vikings</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Current Team</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in ViewBag.ExWichitaVikings.AllPlayers)
+                {
+                    <tr>
+                        <td>@p.PlayerOnTeam.PlayerId</td>
+                        <td>@p.PlayerOnTeam.FirstName @p.PlayerOnTeam.LastName </td>
+                        <td>@p.PlayerOnTeam.CurrentTeam.TeamName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm- col-md-6 col-lg-4">
+        <h3>4) All teams that Emily Sanchez played for before she joined the Indiana Royals</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in ViewBag.EmilySanchez.AllTeams)
+                {
+                    <tr>
+                        <td>@t.TeamOfPlayer.TeamId</td>
+                        <td>@t.TeamOfPlayer.TeamName</td>
+                        <td>@t.TeamOfPlayer.Location</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-sm- col-md-6 col-lg-4">
+        <h3>4) All teams that Emily Sanchez played for before she joined the Indiana Royals</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in ViewBag.EmilySanchez.AllTeams)
+                {
+                    <tr>
+                        <td>@t.TeamOfPlayer.TeamId</td>
+                        <td>@t.TeamOfPlayer.TeamName</td>
+                        <td>@t.TeamOfPlayer.Location</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm- col-md-6 col-lg-4">
+        <h3>5) Everyone named "Levi" who has ever played in the Atlantic Federation of Amateur Baseball Players</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Current Team</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in ViewBag.Levi.Teams)
+                {   
+                    @foreach (var p in t.AllPlayers)
+                    {
+                        @if (@p.PlayerOnTeam.FirstName == "Levi")
+                        {
+                            <tr>
+                                <td>@p.PlayerOnTeam.PlayerId</td>
+                                <td>@p.PlayerOnTeam.FirstName @p.PlayerOnTeam.LastName</td>
+                                <td>@p.PlayerOnTeam.CurrentTeam.TeamName</td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm- col-md-6 col-lg-4">
+        <h3>6) All players, sorted by the number of teams they've played for</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Current Team</th>
+                    <th>#of Teams</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in ViewBag.AllPlayers)
+                {
+                    <tr>
+                        <td>@p.PlayerId</td>
+                        <td>@p.FirstName @p.LastName</td>
+                        <td>@p.CurrentTeam.TeamName</td>
+                        <td>@p.AllTeams.Count</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

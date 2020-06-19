@@ -123,8 +123,53 @@ namespace SportsORM.Controllers
 
         [HttpGet("level_3")]
         public IActionResult Level3()
-        {
+        {   
+            ViewBag.AlexanderBailey = context.Players
+                .Include(p => p.AllTeams)
+                .ThenInclude(t => t.TeamOfPlayer)
+                .FirstOrDefault(p => (p.FirstName == "Alexander" && p.LastName == "Bailey"));
+            
+            ViewBag.AlexanderBailey2 = context.Teams
+                .Include(t =>t.AllPlayers)
+                .ThenInclude (pt => pt.PlayerOnTeam)
+                // .ThenInclude ()
+                .OrderBy(t => t.TeamId)
+                .ToList();
+
+            ViewBag.ManitobaTigerCats = context.Teams
+                .Include(t => t.AllPlayers)
+                .ThenInclude ( p => p.PlayerOnTeam)
+                .ThenInclude ( p => p.CurrentTeam)
+                .FirstOrDefault(t => t.Location == "Manitoba" && t.TeamName == "Tiger-Cats");
+
+            ViewBag.ExWichitaVikings = context.Teams
+                .Include(t => t.AllPlayers)
+                .ThenInclude(t => t.PlayerOnTeam)
+                .ThenInclude(p => p.CurrentTeam)
+                .FirstOrDefault( t => t.TeamName == "Vikings" && t.Location == "Wichita");
+
+            ViewBag.EmilySanchez = context.Players
+                .Include(p => p.AllTeams)
+                .ThenInclude (p=> p.TeamOfPlayer)
+                // .ThenInclude (t => t.TeamName != "Royals" && t.Location != "Indiana")
+                .FirstOrDefault(p => p.FirstName == "Emily" && p.LastName == "Sanchez");
+
+            ViewBag.Levi = context.Leagues
+                .Include(l => l.Teams)
+                .ThenInclude(t => t.AllPlayers)
+                .ThenInclude(pt => pt.PlayerOnTeam)
+                .ThenInclude(p => p.CurrentTeam)
+                .FirstOrDefault( l => l.Name == "Atlantic Federation of Amateur Baseball Players");
+            
+            ViewBag.AllPlayers = context.Players
+                .Include(p => p.AllTeams)
+                .ThenInclude (pt => pt.TeamOfPlayer)
+                .Include(p => p.CurrentTeam)
+                .OrderBy(p => p.AllTeams.Count)
+                .ToList();
             return View();
+
+
         }
 
     }
